@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لعبة التخمين</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        input {
+            padding: 10px;
+            font-size: 16px;
+        }
+        button {
+            padding: 10px;
+            font-size: 16px;
+        }
+        .message {
+            margin-top: 20px;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <h1>تخمين الرقم!</h1>
+    <p>حاول تخمين الرقم بين 1 و 100.</p>
+    <input type="number" id="guess" placeholder="أدخل تخمينك" />
+    <button id="guessButton">تخمين</button>
+    <div class="message" id="message"></div>
+
+    <script>
+        let numberToGuess = Math.floor(Math.random() * 100) + 1;
+        let attempts = 0;
+
+        document.getElementById("guessButton").onclick = function() {
+            const userGuess = Number(document.getElementById("guess").value);
+            const messageDiv = document.getElementById("message");
+            attempts++;
+
+            if (userGuess < numberToGuess) {
+                messageDiv.textContent = "التخمين منخفض جدًا! حاول مرة أخرى.";
+            } else if (userGuess > numberToGuess) {
+                messageDiv.textContent = "التخمين مرتفع جدًا! حاول مرة أخرى.";
+            } else {
+                messageDiv.textContent = `تهانينا! لقد خمّنت الرقم ${numberToGuess} في ${attempts} محاولة.`;
+            }
+
+            document.getElementById("guess").value = ''; // مسح المدخل
+        };
+    </script>
+</body>
+</html>
